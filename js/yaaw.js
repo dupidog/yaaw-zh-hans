@@ -88,6 +88,15 @@ var YAAW = (function() {
 			$("#btnSelectStopped").live("click", function() {
 				YAAW.tasks.selectStopped();
 			});
+			$("#btnSelectError").live("click", function() {
+				YAAW.tasks.selectError();
+			});
+			$("#btnSelectCompleted").live("click", function() {
+				YAAW.tasks.selectCompleted();
+			});
+			$("#btnSelectRemoved").live("click", function() {
+				YAAW.tasks.selectRemoved();
+			});
 			$("#btnStartAll").live("click", function() {
 				ARIA2.unpause_all();
 			});
@@ -670,6 +679,33 @@ var YAAW = (function() {
 				var _this = this;
 				this.unSelectAll(true);
 				$("#stopped-tasks-table .task").each(function(i, n) {
+					_this.select(n);
+				});
+				this.check_select();
+			},
+
+			selectError: function() {
+				var _this = this;
+				this.unSelectAll(true);
+				$("#stopped-tasks-table .task[data-status=error]").each(function(i, n) {
+					_this.select(n);
+				});
+				this.check_select();
+			},
+
+			selectCompleted: function() {
+				var _this = this;
+				this.unSelectAll(true);
+				$("#stopped-tasks-table .task[data-status=complete]").each(function(i, n) {
+					_this.select(n);
+				});
+				this.check_select();
+			},
+
+			selectRemoved: function() {
+				var _this = this;
+				this.unSelectAll(true);
+				$("#stopped-tasks-table .task[data-status=removed]").each(function(i, n) {
 					_this.select(n);
 				});
 				this.check_select();
